@@ -81,7 +81,7 @@ class Conversation():
 async def create_conversation(session: ClientSession, tone: str, image: str = None, proxy: str = None) -> Conversation:
     url = 'https://www.bing.com/turing/conversation/create?bundleVersion=1.1199.4'
     async with session.get(url, proxy=proxy) as response:
-        data = await response.json()
+        data = await response.json(content_type='text/html')  ###############这里是要修改地方，添加了content_type='text/html'
 
         conversationId = data.get('conversationId')
         clientId = data.get('clientId')
